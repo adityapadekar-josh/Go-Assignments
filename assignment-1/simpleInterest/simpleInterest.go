@@ -29,10 +29,20 @@ func main(){
   inputValues := strings.Split(inputString, ",");
 
   principalAmount, err1 := strconv.ParseFloat(inputValues[0], 64);
+
+  if err1 != nil {
+    log.Fatal("Invalid input string")
+  }
+  
   interestRate, err2 := strconv.ParseFloat(inputValues[1], 64);
+  
+  if err2 != nil {
+    log.Fatal("Invalid input string")
+  }
+  
   timePeriod, err3 := strconv.ParseFloat(inputValues[2], 64);
 
-  if err1 != nil || err2 != nil || err3 != nil {
+  if err3 != nil {
     log.Fatal("Invalid input string")
   }
 
