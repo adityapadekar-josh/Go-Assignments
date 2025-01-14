@@ -31,19 +31,19 @@ func main(){
   principalAmount, err1 := strconv.ParseFloat(inputValues[0], 64);
 
   if err1 != nil {
-    log.Fatal("Invalid input string")
+    log.Fatal("Invalid principal amount")
   }
   
   interestRate, err2 := strconv.ParseFloat(inputValues[1], 64);
   
   if err2 != nil {
-    log.Fatal("Invalid input string")
+    log.Fatal("Invalid interest rate")
   }
   
   timePeriod, err3 := strconv.ParseFloat(inputValues[2], 64);
 
   if err3 != nil {
-    log.Fatal("Invalid input string")
+    log.Fatal("Invalid time period")
   }
 
   simpleInterest := calculateSimpleInterest(principalAmount, interestRate, timePeriod);
