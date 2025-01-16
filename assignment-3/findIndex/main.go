@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
-	"log"
+  "fmt"
+  "log"
 )
 
 var indexToDayMapping = map[int]string{
@@ -20,9 +20,8 @@ func getDayByIndex(index int) string {
 
   if ok {
     return day;
-  } else {
-    return "Not A Day";
   }
+  return "Not A Day";
 }
 
 func main()  {

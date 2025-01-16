@@ -5,8 +5,8 @@ import (
   "log"
 )
 
-var ITEMS = []string{"qwe", "wer", "ert", "rty", "tyu", "yui", "uio", "iop"};
-var ITEMS_LEN = len(ITEMS);
+var Items = []string{"qwe", "wer", "ert", "rty", "tyu", "yui", "uio", "iop"};
+var ItemsLen = len(Items);
 
 func main(){
   var index1, index2 int;
@@ -15,11 +15,11 @@ func main(){
     log.Fatal("Invalid input");
   }
 
-  if index1 < 0 || index1 >= ITEMS_LEN || index2 < 0 || index2 >= ITEMS_LEN || index1 > index2 {
+  if index1 < 0 || index1 >= ItemsLen || index2 < 0 || index2 >= ItemsLen || index1 > index2 {
     log.Fatal("Incorrect Indexes");
   }
 
-  fmt.Println(ITEMS[:index1 + 1]);
-  fmt.Println(ITEMS[index1:index2 + 1]);
-  fmt.Println(ITEMS[index2:]);
+  fmt.Println(Items[:index1 + 1]);
+  fmt.Println(Items[index1:index2 + 1]);
+  fmt.Println(Items[index2:]);
 }
