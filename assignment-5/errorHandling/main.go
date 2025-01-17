@@ -7,7 +7,7 @@ import (
 )
 
 func accessSlice(slice []int, index int) (int, error) {
-	if index < 0 || index > len(slice) {
+	if index < 0 || index >= len(slice) {
 		return 0, errors.New("Index out of bound")
 	}
 
