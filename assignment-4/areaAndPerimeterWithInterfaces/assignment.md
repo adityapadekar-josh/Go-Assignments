@@ -6,7 +6,6 @@ This program allows the user to choose between a rectangle and a square, and it 
 
 1. **Quadrilateral Interface**:  
    The interface `Quadrilateral` should define two methods: `Area()` and `Perimeter()`.
-   
 2. **Implementing the Interface**:  
    The `Rectangle` and `Square` structs should implement the `Quadrilateral` interface by defining their own `Area()` and `Perimeter()` methods.
 
@@ -16,21 +15,22 @@ This program allows the user to choose between a rectangle and a square, and it 
 ### Formulae:
 
 - **Rectangle**:
-    - Area: `Area = length * width`
-    - Perimeter: `Perimeter = 2 * (length + width)`
-  
+  - Area: `Area = length * width`
+  - Perimeter: `Perimeter = 2 * (length + width)`
 - **Square**:
-    - Area: `Area = side * side`
-    - Perimeter: `Perimeter = 4 * side`
+  - Area: `Area = side * side`
+  - Perimeter: `Perimeter = 4 * side`
 
 ### Example Input/Output
 
 **Input:**
+
 ```
 Enter 1 for Rectangle or 2 for Square: 1
 ```
 
 **Output:**
+
 ```
 Area: 200
 Perimeter: 60

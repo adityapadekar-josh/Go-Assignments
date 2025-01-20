@@ -10,19 +10,21 @@ The program should have methods `Area()` and `Perimeter()` in the `Rectangle` ty
 - **Perimeter**: `Perimeter = 2 * (length + width)`
 
 ### Method Signatures:
+
 - `Area() int`
 - `Perimeter() int`
 
 ## Example
 
 ### Input:
+
 ```
 10 20
 ```
 
 ### Output:
+
 ```
 Area of Rectangle: 200
 Perimeter of Rectangle: 60
 ```
-

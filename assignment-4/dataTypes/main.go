@@ -25,21 +25,21 @@ func acceptAnything(value interface{}) {
 
 func main() {
 	var choice int
-  if _, err := fmt.Scanln(&choice); err != nil {
-    fmt.Println("Failed to read input")
-  }
+	if _, err := fmt.Scanln(&choice); err != nil {
+		fmt.Println("Failed to read input")
+		return
+	}
 
 	switch choice {
 	case 1:
 		acceptAnything(42)
 	case 2:
-		acceptAnything("Hello World!") 
+		acceptAnything("Hello World!")
 	case 3:
-		acceptAnything(true) 
+		acceptAnything(true)
 	case 4:
-		acceptAnything(hello{"Greetings from Hello class"}) 
+		acceptAnything(hello{"Greetings from Hello class"})
 	default:
 		fmt.Println("Invalid choice.")
 	}
 }
-
