@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 )
 
 type Quadrilateral interface {
@@ -50,13 +49,14 @@ func (r Rectangle) Perimeter() int {
 
 func Print(quadrilateral Quadrilateral){ 
   fmt.Println("Area =", quadrilateral.Area())
-  fmt.Println("Perimenter =", quadrilateral.Perimeter())
+  fmt.Println("Perimeter =", quadrilateral.Perimeter())
 }
 
 func main() {
   var choice int
   if _, err := fmt.Scan(&choice); err != nil {
-    log.Fatal("Invalid  input")
+    fmt.Println("Invalid  input")
+    return
   }
 
   rectangle := NewRectangle(20, 10)
