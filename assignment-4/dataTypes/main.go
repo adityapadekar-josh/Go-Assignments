@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 )
 
 type hello struct {
@@ -27,7 +26,7 @@ func acceptAnything(value interface{}) {
 func main() {
 	var choice int
   if _, err := fmt.Scanln(&choice); err != nil {
-    log.Fatal("Failed to read input")
+    fmt.Println("Failed to read input")
   }
 
 	switch choice {

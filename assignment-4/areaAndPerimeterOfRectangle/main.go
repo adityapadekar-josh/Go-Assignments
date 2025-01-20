@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 )
 
 type Rectangle struct {
@@ -29,12 +28,13 @@ func main() {
   var inputLength, inputWidth int
 
   if _, err := fmt.Scan(&inputLength, &inputWidth); err != nil {
-    log.Fatal("Invalid  input")
+    fmt.Println("Invalid  input")
+    return
   }
 
   rectangle := NewRectangle(inputLength, inputWidth)
 
   fmt.Println("Area =", rectangle.Area())
-  fmt.Println("Perimenter =", rectangle.Perimeter())
+  fmt.Println("Perimeter =", rectangle.Perimeter())
 }
 
