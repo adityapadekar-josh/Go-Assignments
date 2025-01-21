@@ -2,18 +2,16 @@ package main
 
 import (
 	"fmt"
-	"log"
 )
 
 func accessSlice(slice []int, index int) {
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Println("internal error:", r)
-			// debug.PrintStack()
 		}
 	}()
 
-	println("item:", index, "value:", slice[index])
+	fmt.Println("item:", index, "value:", slice[index])
 }
 
 func main() {
@@ -22,7 +20,8 @@ func main() {
 	var indexInput int
 
 	if _, err := fmt.Scan(&indexInput); err != nil {
-		log.Fatal("Failed to read the input:", err)
+		fmt.Println("Failed to read the input:", err)
+		return
 	}
 
 	accessSlice(data, indexInput)
