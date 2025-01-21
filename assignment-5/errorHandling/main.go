@@ -3,7 +3,6 @@ package main
 import (
 	"errors"
 	"fmt"
-	"log"
 )
 
 func accessSlice(slice []int, index int) (int, error) {
@@ -20,13 +19,15 @@ func main() {
 	var indexInput int
 
 	if _, err := fmt.Scan(&indexInput); err != nil {
-		log.Fatal("Failed to read the input:", err)
+		fmt.Println("Failed to read the input:", err)
+		return
 	}
 
 	value, err := accessSlice(data, indexInput)
 	if err != nil {
-		log.Fatal(err.Error())
+		fmt.Println(err.Error())
+		return
 	}
 
-	println("item:", indexInput, "value:", value)
+	fmt.Println("item:", indexInput, "value:", value)
 }
