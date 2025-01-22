@@ -16,6 +16,7 @@ func main() {
 
 	go func() {
 		m.Lock()
+		defer m.Unlock()
 		nIsEven := isEven(n)
 		time.Sleep(5 * time.Millisecond)
 		if nIsEven {
@@ -23,13 +24,12 @@ func main() {
 			return
 		}
 		fmt.Println(n, "is odd")
-		m.Unlock()
 	}()
 
 	go func() {
 		m.Lock()
+		defer m.Unlock()
 		n++
-		m.Unlock()
 	}()
 
 	// just waiting for the goroutines to finish before exiting
