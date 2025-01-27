@@ -10,10 +10,20 @@ import (
 	"time"
 )
 
-func main() {
-	go RunCronJobs()
+// Structures
+type Websites struct {
+	Data map[string]string `json:"data"`
+	sync.RWMutex
+}
 
-	router := createNewRouter()
+func main() {
+	var websites = &Websites{
+		Data: make(map[string]string),
+	}
+
+	go RunCronJobs(websites)
+
+	router := createNewRouter(websites)
 
 	setUpServer(router)
 }
@@ -33,11 +43,11 @@ func setUpServer(router *http.ServeMux) {
 }
 
 // Routing Setup
-func createNewRouter() *http.ServeMux {
+func createNewRouter(websites *Websites) *http.ServeMux {
 	router := http.NewServeMux()
 
-	router.HandleFunc("POST /websites", AddWebsiteToWatchList())
-	router.HandleFunc("GET /websites", GetWebsitesStatus())
+	router.HandleFunc("POST /websites", AddWebsiteToWatchList(websites))
+	router.HandleFunc("GET /websites", GetWebsitesStatus(websites))
 
 	return router
 }
@@ -68,19 +78,8 @@ func WriteJson(w http.ResponseWriter, statusCode int, message string, data inter
 
 }
 
-// Structures
-type Websites struct {
-	Data map[string]string `json:"data"`
-	sync.RWMutex
-}
-
-// Global variables
-var websites = &Websites{
-	Data: make(map[string]string),
-}
-
 // Handlers
-func AddWebsiteToWatchList() http.HandlerFunc {
+func AddWebsiteToWatchList(websites *Websites) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		requestBody := &struct {
 			Data []string `json:"data"`
@@ -110,7 +109,7 @@ func AddWebsiteToWatchList() http.HandlerFunc {
 	}
 }
 
-func GetWebsitesStatus() http.HandlerFunc {
+func GetWebsitesStatus(websites *Websites) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		name := r.URL.Query().Get("name")
 
@@ -147,7 +146,7 @@ func (h HttpStatusChecker) Check(ctx context.Context, website string) (bool, err
 	return response.StatusCode >= 200 && response.StatusCode < 300, nil
 }
 
-func updateWebsiteStatus(wg *sync.WaitGroup, statusChecker StatusChecker, website string) {
+func updateWebsiteStatus(wg *sync.WaitGroup, statusChecker StatusChecker, website string, websites *Websites) {
 	defer wg.Done()
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
@@ -167,22 +166,22 @@ func updateWebsiteStatus(wg *sync.WaitGroup, statusChecker StatusChecker, websit
 }
 
 // Cron job
-func StatusCheckerCronJob() {
+func StatusCheckerCronJob(websites *Websites) {
 	var wg sync.WaitGroup
 
 	statusChecker := HttpStatusChecker{}
 
 	for website := range websites.Data {
 		wg.Add(1)
-		go updateWebsiteStatus(&wg, statusChecker, website)
+		go updateWebsiteStatus(&wg, statusChecker, website, websites)
 	}
 
 	wg.Wait()
 }
 
-func RunCronJobs() {
+func RunCronJobs(websites *Websites) {
 	for {
 		time.Sleep(time.Minute)
-		StatusCheckerCronJob()
+		StatusCheckerCronJob(websites)
 	}
 }
